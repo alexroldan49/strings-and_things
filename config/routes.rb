@@ -1,3 +1,16 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  resources :products, only:[:index, :show]
+  
+  
+  
+  post "/signup", to: "users#create"
+  get "/me" , to: "users#show"
+  get "/users" , to: "users#index"
+  patch "/update/:id", to: "users#update"
+
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  
 end
