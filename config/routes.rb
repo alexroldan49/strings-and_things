@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   resources :products, only:[:index, :show]
   resources :categories, only:[:index, :show]
   resources :accessories, only:[:index, :show]
-  
+  resources :orders, only:[:index, :show, :create]
   
   
   post "/signup", to: "users#create"
@@ -14,5 +14,7 @@ Rails.application.routes.draw do
 
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
+
+  
   
 end
