@@ -19,6 +19,10 @@ class OrdersController < ApplicationController
             render json: {errors: order.errors}, status: :unprocessable_entity
         end
     end
+
+    def index
+        render json: Order.all, status: :ok
+    end
     
 
     private
@@ -28,7 +32,7 @@ class OrdersController < ApplicationController
     end
 
     def order_params
-        params.permit(:user_id, product_orders: [])
+        params.permit(:user_id, :status, :order_date, :order_total, :shipping, product_orders: [])
     end
     
 end
