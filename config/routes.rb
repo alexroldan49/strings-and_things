@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   resources :categories, only:[:index, :show]
   resources :accessories, only:[:index, :show]
   resources :orders, only:[:index, :show, :create]
+  resources :addresses, only:[:create]
   
   
   post "/signup", to: "users#create"

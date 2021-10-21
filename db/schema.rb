@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_14_171739) do
+ActiveRecord::Schema.define(version: 2021_10_20_221922) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,18 @@ ActiveRecord::Schema.define(version: 2021_10_14_171739) do
     t.index ["category_id"], name: "index_accessories_on_category_id"
   end
 
+  create_table "addresses", force: :cascade do |t|
+    t.string "address"
+    t.string "apt"
+    t.string "city"
+    t.string "state"
+    t.integer "zipcode"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_addresses_on_user_id"
+  end
+
   create_table "categories", force: :cascade do |t|
     t.string "name"
     t.boolean "electric"
@@ -36,6 +48,8 @@ ActiveRecord::Schema.define(version: 2021_10_14_171739) do
     t.bigint "user_id", null: false
     t.string "order_date"
     t.string "status"
+    t.float "order_total"
+    t.string "shipping"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_orders_on_user_id"
@@ -70,12 +84,12 @@ ActiveRecord::Schema.define(version: 2021_10_14_171739) do
     t.string "username"
     t.string "password_digest"
     t.string "email"
-    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
   add_foreign_key "accessories", "categories"
+  add_foreign_key "addresses", "users"
   add_foreign_key "orders", "users"
   add_foreign_key "product_orders", "orders"
   add_foreign_key "product_orders", "products"
