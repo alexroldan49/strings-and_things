@@ -7,7 +7,6 @@ class OrdersController < ApplicationController
            params[:product_orders].each do |product|
             prod = order.product_orders.build(product_id: product[:product_id])
             prod.save
-            byebug
 
             end
             # build product
