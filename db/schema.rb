@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_221922) do
+ActiveRecord::Schema.define(version: 2021_10_24_064725) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,11 +80,21 @@ ActiveRecord::Schema.define(version: 2021_10_20_221922) do
     t.index ["category_id"], name: "index_products_on_category_id"
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "product_id", null: false
+    t.float "star_rating"
+    t.string "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_reviews_on_product_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"
     t.string "email"
-    t.string "address"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -95,4 +105,6 @@ ActiveRecord::Schema.define(version: 2021_10_20_221922) do
   add_foreign_key "product_orders", "orders"
   add_foreign_key "product_orders", "products"
   add_foreign_key "products", "categories"
+  add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
 end

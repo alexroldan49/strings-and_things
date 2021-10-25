@@ -3,4 +3,5 @@ class UserSerializer < ActiveModel::Serializer
 
   has_many :orders
   has_many :addresses
+  has_many :reviews
 end
